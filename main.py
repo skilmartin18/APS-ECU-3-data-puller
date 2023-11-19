@@ -71,7 +71,6 @@ ip = conf["ip"]
 homepageurl = "http://{}/cgi-bin/home".format(ip)
 rtdpageurl = "http://{}/cgi-bin/parameters".format(ip)
 
-
 print("waiting for connection")
 check_connection_up(ip)
 print("connected")
