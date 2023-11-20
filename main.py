@@ -7,7 +7,7 @@ import os
 def get_total_power(page):
 
     start_tag = b"<td align=center>Current Power</td><td align=center>"
-    end_tag = b"</td></tr></center><center><tr><td align=center>Generation Of Current Day</td>"
+    end_tag = b" W</td></tr></center><center><tr><td align=center>Generation Of Current Day</td>"
 
     start = page.find(start_tag) + len(start_tag)
     end = page.find(end_tag)
@@ -17,7 +17,7 @@ def get_total_power(page):
 def get_days_generation(page):
 
     start_tag = b"<td align=center>Generation Of Current Day</td><td align=center>"
-    end_tag = b"</td></tr></center><center><tr><td align=center>Last connection to website</td>"
+    end_tag = b" kWh</td></tr></center><center><tr><td align=center>Last connection to website</td>"
 
     start = page.find(start_tag) + len(start_tag)
     end = page.find(end_tag)
@@ -27,7 +27,7 @@ def get_days_generation(page):
 def get_lifetime_generation(page):
 
     start_tag = b"</tr></center><center><tr><td align=center>Lifetime generation</td><td align=center>"
-    end_tag = b"</td></tr></center><center><tr><td align=center>Current Power</td>"
+    end_tag = b" kWh</td></tr></center><center><tr><td align=center>Current Power</td>"
 
     start = page.find(start_tag) + len(start_tag)
     end = page.find(end_tag)
@@ -82,11 +82,11 @@ while True:
         data = []
 
         if "total_power" in conf["data_types"]:
-            data.append(str(get_total_power(page)))
+            data.append(float(get_total_power(page)))
         if "days_generation" in conf["data_types"]:
-            data.append(str(get_days_generation(page)))
+            data.append(float(get_days_generation(page)))
         if "lifetime_generation" in conf["data_types"]:
-            data.append(str(get_lifetime_generation(page)))
+            data.append(float(get_lifetime_generation(page)))
         if "date_time" in conf["data_types"]:
             data.append(str(get_current_time()))
         data.append(time.time())
